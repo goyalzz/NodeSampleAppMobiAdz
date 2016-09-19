@@ -31,11 +31,9 @@ router.route('/newMobileData')
             MobileService.findOne({id: Utils.decrypt(req.headers['authtoken']).id},
                 function(err, dataOld) {
                 if(err) res.status(400).json({ status: false, message: err.errors.data.message});
-                console.log(dataOld.data);
                 Object.keys(req.body.data).forEach(function(k) {
                     dataOld.data[k] = req.body.data[k];
                 });
-                console.log(dataOld.data);
                 dataOld.markModified('data');
                 MobileService.update(dataOld, function(errNew, dataNew) {
                     if(errNew) res.status(400).json({ status: false, message: errNew.errors.data.message});

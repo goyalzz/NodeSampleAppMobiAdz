@@ -17,7 +17,7 @@ ___
 
 ## Copyright and License
 
-[MIT License](https://gitlab.com/ankush.goyal/RIBFacebookBot/blob/master/LICENSE "License")
+[MIT License](https://github.com/goyalzz/NodeSampleAppMobiAdz/blob/master/LICENSE "License")
 
 Copyright (c) 2016 Pronto IT Labs
 
