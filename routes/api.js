@@ -6,7 +6,7 @@ var MobileService = require('../mongoose/MobileService.js');
 
 router.use(function(req, res, next) {
     // do logging
-    console.log('Headers', JSON.stringify(req.headers));
+    // console.log('Headers', JSON.stringify(req.headers));
     // console.log('Content-Type', req.headers['content-type']);
     if(Utils.checkNotUndefined(req.headers['content-type'])
     	&& req.headers['content-type'].indexOf('application/json') > -1 ) {
@@ -31,9 +31,11 @@ router.route('/newMobileData')
             MobileService.findOne({id: Utils.decrypt(req.headers['authtoken']).id},
                 function(err, dataOld) {
                 if(err) res.status(400).json({ status: false, message: err.errors.data.message});
+                console.log(dataOld.data);
                 Object.keys(req.body.data).forEach(function(k) {
                     dataOld.data[k] = req.body.data[k];
                 });
+                console.log(dataOld.data);
                 dataOld.markModified('data');
                 MobileService.update(dataOld, function(errNew, dataNew) {
                     if(errNew) res.status(400).json({ status: false, message: errNew.errors.data.message});
