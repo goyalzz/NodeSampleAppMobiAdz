@@ -1,5 +1,5 @@
 var cron = require('cron');
-var MobileService = require('../utils/mongoUtils/MobileService.js');
+var MobileService = require('../mongoose/MobileService.js');
 
 //    CRON JOB URL: https://www.npmjs.com/package/cron
 //	  CRON JOB URL: http://merencia.com/node-cron

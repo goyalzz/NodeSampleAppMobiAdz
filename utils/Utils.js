@@ -82,6 +82,11 @@ class Utils {
     return dec;
   }
 
+  checkNotUndefined(query) {
+    if ( typeof query !== 'undefined') return true;
+    return false;
+  }
+
 }
 
 var utils = new Utils();

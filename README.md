@@ -1,6 +1,18 @@
 # MobiAdz Sample Api
 
 > This is a sample MobiAdz APi's in NodeJs
+
+```
+Run Node on Development Envirenment use below command
+
+env NODE_ENV="development" MONGODB_URI="xyz" PORT=8080 node app.js
+
+
+Run Node on Production Envirenment use below command
+
+node ./app.js
+```
+
 ___
 
 ## Copyright and License

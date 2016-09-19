@@ -1,19 +1,19 @@
 {
-  "name": "MobiAdz-Api-Sample",
+  "name": "MobiAdzSampleApi",
   "version": "1.0.0",
-  "description": "MobiAdz Api Sample",
+  "private": true,
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/ankush.goyal/RIBFacebookBot.git"
+    "url": "https://github.com/goyalzz/NodeSampleAppMobiAdz.git"
   },
   "keywords": [
-    "messenger-bot"
+    "Node Sample Api"
   ],
-  "author": "Pronto It Labs",
+  "author": "Ankush Goyal",
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/ankush.goyal/RIBFacebookBot/issues"
@@ -23,14 +23,19 @@
     "node": "6.5.0"
   },
   "dependencies": {
-    "body-parser": "^1.15.1",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
     "crypto": "0.0.3",
-    "express": "^4.14.0",
+    "express": "~4.14.0",
     "node-fetch": "^1.6.0",
     "request": "^2.74.0",
     "cron"    : "^1.1.0",
     "q"       : "^1.4.1",
     "mongoose": "^4.5.10",
-    "morgan"  : "^1.1.1"
+    "mongodb": "^2.2.9"
   }
 }
