@@ -31,8 +31,9 @@ router.route('/newMobileData')
             MobileService.findOne({id: Utils.decrypt(req.headers['authtoken']).id},
                 function(err, dataOld) {
                 if(err) res.status(400).json({ status: false, message: err.errors.data.message});
-                Object.keys(req.body.data).forEach(function(k) {
-                    dataOld.data[k] = req.body.data[k];
+                var requestData = Utils.isJsonString(req.body.data) ? JSON.parse(req.body.data) : req.body.data;
+                Object.keys(requestData).forEach(function(k) {
+                    dataOld.data[k] = requestData[k];
                 });
                 dataOld.markModified('data');
                 MobileService.update(dataOld, function(errNew, dataNew) {
@@ -47,7 +48,8 @@ router.route('/newMobileData')
                 });
             });
         } else {
-            MobileService.save(req.body.data, function(err, data) {
+            MobileService.save(Utils.isJsonString(req.body.data) ? JSON.parse(req.body.data) : req.body.data,
+             function(err, data) {
                 if(err) res.status(400).json({ status: false, message: err.errors.data.message});
                 var returnData = {
                     id: data.id,
