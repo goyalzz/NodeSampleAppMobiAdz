@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Responsive Ad checker - Test sizes of HTML5 banners</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="canonical" href="#" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/checker.css" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+<body>
+  <iframe id="adserve" src="/ad.html" border="0" scrolling="no" allowtransparency="true" width="100%" height="125" style="border:0;" onload="adFun()"></iframe>
+
+<script type="text/javascript">
+	function adFun() {
+  		var iFrame = document.getElementById("adserve");
+  		document.getElementById("adserve").contentWindow.document.body.onclick = function() {
+  			if(is_mobile()) {
+  				window.open("http://goyalzz.blogspot.in","_system");
+  			} else {
+        		window.open("http://goyalzz.blogspot.in","_self");
+        	}
+    	}
+	};
+
+	function is_mobile() {
+    	var agents = ['android', 'webos', 'iphone', 'ipad', 'blackberry'];
+    	for(i in agents) {
+        	if(navigator.userAgent.match('/'+agents[i]+'/i')) {
+            	return true;
+	        }
+    	}
+    	return false;
+	};
+</script>
+
+</body>
+</html>

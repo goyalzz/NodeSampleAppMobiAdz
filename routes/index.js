@@ -8,4 +8,14 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.resolve('views') + '/home.html');
 });
 
+router.get('/ad.html', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.sendFile(path.resolve('views') + '/ad.html');
+});
+
+router.get('/adserve.html', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.sendFile(path.resolve('views') + '/adserve.html');
+});
+
 module.exports = router;
