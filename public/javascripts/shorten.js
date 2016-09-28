@@ -4,6 +4,9 @@ $('.btn-shorten').on('click', function(){
   $.ajax({
     url: '/api/urlshorten',
     type: 'POST',
+    headers: {
+        'Content-Type':'application/json'
+    },
     dataType: 'JSON',
     data: {url: $('#url-field').val()},
     success: function(data){

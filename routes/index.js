@@ -23,7 +23,7 @@ router.get('/blinktextad.html', function(req, res, next) {
   res.sendFile(path.resolve('views') + '/blinktextad.html');
 });
 
-router.get('/tinyurl.html' || '/tinyurl', function(req, res, next) {
+router.get('/tinyurl', function(req, res, next) {
   // res.render('index', { title: 'Express' });
   res.sendFile(path.resolve('views') + '/url-shortener.html');
 });
