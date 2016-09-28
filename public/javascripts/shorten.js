@@ -22,15 +22,14 @@ $('.btn-shorten').on('click', function(){
   //   }
   // });
 
-  console.log($('#url-field').val());
   var settings = {
-    url: "mobiadzapi.herokuapp.com/api/urlshorten",
+    url: "https://mobiadzapi.herokuapp.com/api/urlshorten",
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     data: {
-      "url": $('#url-field').val()
+      url: $('#url-field').val()
     }
   }
 
