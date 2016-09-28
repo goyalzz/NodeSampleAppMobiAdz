@@ -30,7 +30,7 @@ $('.btn-shorten').on('click', function(){
       "Content-Type": "application/json"
     },
     data: {
-      url: "http://goyalzz.blogspot.com"
+      "url": "http://goyalzz.blogspot.com"
     }
   }
 
