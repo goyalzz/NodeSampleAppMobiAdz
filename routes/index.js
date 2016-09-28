@@ -18,4 +18,9 @@ router.get('/adserve.html', function(req, res, next) {
   res.sendFile(path.resolve('views') + '/adserve.html');
 });
 
+router.get('/blinktextad.html', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.sendFile(path.resolve('views') + '/blinktextad.html');
+});
+
 module.exports = router;
