@@ -8,7 +8,9 @@ $('.btn-shorten').on('click', function(){
         'Content-Type':'application/json'
     },
     dataType: 'JSON',
-    data: {url: $('#url-field').val()},
+    data: {
+      'url': $('#url-field').val()
+    },
     success: function(data){
         // display the shortened URL to the user that is returned by the server
         var resultHTML = '<a class="result" href="' + data.shortUrl + '">'
