@@ -13,8 +13,9 @@ router.use(function(req, res, next) {
     	&& req.headers['content-type'].indexOf('application/json') > -1 ) {
         next(); // make sure we go to the next routes and don't stop here
     } else {
-        res.status(400);
-        res.json({ status: false, message: 'Invalid Request Content-Type' });
+        next();
+        // res.status(400);
+        // res.json({ status: false, message: 'Invalid Request Content-Type' });
         // res.send('Invalid Request Content-Type');
     }
 });
@@ -77,9 +78,7 @@ router.route('/mobileData/:id')
         res.send(req.params);
     });
 
-router.route('/urlshorten')
-
-    .post(function(req, res) {
+router.post('/urlshorten', function(req, res) {
         res.status(200);
         res.send(req.body);
     });
