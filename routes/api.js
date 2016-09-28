@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Utils = require('../utils/Utils.js');
+var UrlShortern = require('../utils/UrlShortern.js');
 var MobileService = require('../mongoose/MobileService.js');
 
 router.use(function(req, res, next) {
@@ -74,6 +75,14 @@ router.route('/mobileData/:id')
     .get(function(req, res) {
         res.status(200);
         res.send(req.params);
+    });
+
+router.route('/urlshorten')
+
+    .post(function(req, res) {
+        var requestData = Utils.isJsonString(req.body.data) ? JSON.parse(req.body.data) : req.body.data;
+        res.status(200);
+        res.send(UrlShortern.encode(requestData.url));
     });
 
 module.exports = router;
