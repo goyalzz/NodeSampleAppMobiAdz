@@ -24,7 +24,7 @@ $('.btn-shorten').on('click', function(){
 
   console.log($('#url-field').val());
   var settings = {
-    url: "/api/urlshorten",
+    url: "mobiadzapi.herokuapp.com/api/urlshorten",
     method: "POST",
     headers: {
       "Content-Type": "application/json"
