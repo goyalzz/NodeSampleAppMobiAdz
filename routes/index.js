@@ -25,7 +25,7 @@ router.get('/blinktextad.html', function(req, res, next) {
 
 router.get('/tinyurl', function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.sendFile(path.resolve('views') + '/url-shortener.html');
+  res.sendFile(path.resolve('views') + '/tinyurl.html');
 });
 
 module.exports = router;
