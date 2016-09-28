@@ -28,4 +28,10 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
   res.sendFile(path.resolve('views') + '/tinyurl.html');
 });
 
+// ALWAYS AT LAST POSITION
+router.get('/:val', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.sendFile(path.resolve('views') + '/'+req.params.val+'.html');
+});
+
 module.exports = router;
