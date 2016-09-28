@@ -8,7 +8,7 @@ var MobileService = require('../mongoose/MobileService.js');
 router.use(function(req, res, next) {
     // do logging
     console.log('Headers', JSON.stringify(req.headers));
-    // console.log('Content-Type', req.headers['content-type']);
+    console.log('Content-Type', req.headers['content-type']);
     if(Utils.checkNotUndefined(req.headers['content-type'])
     	&& req.headers['content-type'].indexOf('application/json') > -1 ) {
         next(); // make sure we go to the next routes and don't stop here
