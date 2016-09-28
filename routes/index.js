@@ -1,5 +1,6 @@
 var express = require('express');
 var path= require('path');
+var UrlShortern = require('../utils/UrlShortern.js');
 var router = express.Router();
 
 /* GET home page. */
@@ -30,8 +31,7 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
 
 // ALWAYS AT LAST POSITION
 router.get('/:val', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.sendFile(path.resolve('views') + '/'+req.params.val+'.html');
+  res.redirect(UrlShortern.decode(req.params.val));
 });
 
 module.exports = router;

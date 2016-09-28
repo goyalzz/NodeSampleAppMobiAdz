@@ -7,15 +7,14 @@ var MobileService = require('../mongoose/MobileService.js');
 
 router.use(function(req, res, next) {
     // do logging
-    console.log('Headers', JSON.stringify(req.headers));
-    console.log('Content-Type', req.headers['content-type']);
+    // console.log('Headers', JSON.stringify(req.headers));
+    // console.log('Content-Type', req.headers['content-type']);
     if(Utils.checkNotUndefined(req.headers['content-type'])
     	&& req.headers['content-type'].indexOf('application/json') > -1 ) {
         next(); // make sure we go to the next routes and don't stop here
     } else {
-        next();
-        // res.status(400);
-        // res.json({ status: false, message: 'Invalid Request Content-Type' });
+        res.status(400);
+        res.json({ status: false, message: 'Invalid Request Content-Type' });
         // res.send('Invalid Request Content-Type');
     }
 });
@@ -79,8 +78,12 @@ router.route('/mobileData/:id')
     });
 
 router.post('/urlshorten', function(req, res) {
-        res.status(200);
-        res.send(req.body);
+        var requestData = Utils.isJsonString(req.body) ? JSON.parse(req.body) : req.body;
+        res.status(200).json({
+            status: true,
+            message: "Successfully Shortern",
+            data: UrlShortern.encode(requestData.url);
+        });
     });
 
 module.exports = router;
