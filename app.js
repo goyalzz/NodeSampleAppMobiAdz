@@ -38,8 +38,8 @@ app.use(express.static(public));
 app.listen(Constants.PORT);
 console.log("App listening on port " + Constants.PORT);
 
-app.use('/api', api);
 app.use('/', routes);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
