@@ -80,10 +80,9 @@ router.route('/mobileData/:id')
 router.route('/urlshorten')
 
     .post(function(req, res) {
-        console.log(req.body.data);
-        var requestData = Utils.isJsonString(req.body.data) ? JSON.parse(req.body.data) : req.body.data;
+        var requestData = Utils.isJsonString(req.body) ? JSON.parse(req.body) : req.body;
         res.status(200);
-        res.send(req.body);
+        res.send(requestData.url);
     });
 
 module.exports = router;
