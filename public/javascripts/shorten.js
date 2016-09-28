@@ -11,7 +11,6 @@ $('.btn-shorten').on('click', function(){
       'url': $('#url-field').val()
     },
     success: function(data){
-        console.log(data);
         // display the shortened URL to the user that is returned by the server
         var resultHTML = '<a class="result" href="' + data.shortUrl + '">'
             + data.shortUrl + '</a>';
@@ -19,7 +18,7 @@ $('.btn-shorten').on('click', function(){
         $('#link').hide().fadeIn('slow');
     },
     error: function (textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
+        console.log(errorThrown);
     }
   });
 
