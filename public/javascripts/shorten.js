@@ -9,7 +9,7 @@ $('.btn-shorten').on('click', function(){
     },
     dataType: 'JSON',
     data: {
-      url: $('#url-field').val()
+      'url': $('#url-field').val()
     },
     success: function(data){
         // display the shortened URL to the user that is returned by the server
