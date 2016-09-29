@@ -1,6 +1,7 @@
 var express = require('express');
 var path= require('path');
 var UrlShortern = require('../utils/UrlShortern.js');
+var Url = require('../mongoose/UrlSchema.js');
 var router = express.Router();
 
 /* GET home page. */
@@ -30,8 +31,17 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
 });
 
 // ALWAYS AT LAST POSITION
-router.get('/:val', function(req, res, next) {
-  res.redirect(UrlShortern.decode(req.params.val));
+router.get('/:encoded_id', function(req, res, next) {
+  // check if url already exists in database
+  Url.findOne({_id: req.params.encoded_id}, function (err, doc){
+    if (doc) {
+      // found an entry in the DB, redirect the user to their destination
+      res.redirect(doc.long_url);
+    } else {
+      // nothing found, take 'em home
+      res.redirect(config.webhost);
+    }
+  });
 });
 
 module.exports = router;

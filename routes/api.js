@@ -4,6 +4,7 @@ var router = express.Router();
 var Utils = require('../utils/Utils.js');
 var UrlShortern = require('../utils/UrlShortern.js');
 var MobileService = require('../mongoose/MobileService.js');
+var Url = require('../mongoose/UrlSchema.js');
 
 router.use(function(req, res, next) {
     // do logging
@@ -78,12 +79,42 @@ router.route('/mobileData/:id')
     });
 
 router.post('/urlshorten', function(req, res) {
-        var requestData = Utils.isJsonString(req.body) ? JSON.parse(req.body) : req.body;
-        res.status(200).json({
-            status: true,
-            message: "Successfully Shortern",
-            data: UrlShortern.encode(requestData.url);
-        });
+    var requestData = Utils.isJsonString(req.body) ? JSON.parse(req.body) : req.body;
+    var longUrl = requestData.url;
+    var shortUrl = '';
+
+    // check if url already exists in database
+    Url.findOne({long_url: longUrl}, function (err, doc){
+        if (doc){
+            // URL has already been shortened
+            // base58 encode the unique _id of that document and construct the short URL
+            shortUrl = "mobiadzapi.herokuapp.com/" + UrlShortern.encode(doc._id);
+            res.status(200).json({
+                status: true,
+                message: "Successfully Shortern",
+                data: shortUrl
+            });
+            // since the document exists, we return it without creating a new entry
+        } else {
+            // The long URL was not found in the long_url field in our urls
+            // collection, so we need to create a new entry
+            var newUrl = Url({
+                long_url: longUrl
+            });
+
+            // save the new link
+            newUrl.save(function(err) {
+                if (err) res.status(400).json({ status: false, message: err.errors.data.message});
+                // construct the short URL
+                shortUrl = "mobiadzapi.herokuapp.com/" + UrlShortern.encode(newUrl._id);
+                res.status(200).json({
+                    status: true,
+                    message: "Successfully Shortern",
+                    data: shortUrl
+                });
+            });
+        }
     });
+});
 
 module.exports = router;
