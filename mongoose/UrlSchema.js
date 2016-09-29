@@ -1,6 +1,14 @@
 // https://coligo.io/create-url-shortener-with-node-express-mongo/
 var mongoose = require('mongoose');
-var Counter = require('../mongoose/CounterSchema.js');
+
+// create the counters schema with an _id field and a seq field
+var CounterSchema = mongoose.Schema({
+    _id: {type: String, required: true},
+    seq: {type: Number, default: 0 }
+});
+
+// create a model from that schema
+var counter = mongoose.model('counter', CounterSchema);
 
 // create a schema for our links
 var urlSchema = new mongoose.Schema({
@@ -14,7 +22,7 @@ var urlSchema = new mongoose.Schema({
 urlSchema.pre('save', function(next){
   var doc = this;
   // find the url_count and increment it by 1
-  Counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, counter) {
+  counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, counter) {
       if (error) {
         console.log(error);
           return next(error);
