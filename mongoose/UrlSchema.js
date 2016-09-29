@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 // create the counters schema with an _id field and a seq field
 var CounterSchema = new mongoose.Schema({
     _id: {type: String, required: true, default: 'url_count'},
-    seq: {type: Number, default: 0 }
+    seq: {type: Number, default: 1001 }
 });
 
 // create a model from that schema
@@ -12,7 +12,7 @@ var counter = mongoose.model('counter', CounterSchema);
 
 // create a schema for our links
 var urlSchema = new mongoose.Schema({
-  _id: {type: Number, index: true, default: 1001 },
+  _id: {type: Number, index: true},
   long_url: String,
   created_at: {type: Date, default: Date.now}
 });
