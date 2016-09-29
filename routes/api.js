@@ -88,7 +88,7 @@ router.post('/urlshorten', function(req, res) {
         if (doc){
             // URL has already been shortened
             // base58 encode the unique _id of that document and construct the short URL
-            shortUrl = "mobiadzapi.herokuapp.com/" + UrlShortern.encode(doc._id);
+            shortUrl = "https://mobiadzapi.herokuapp.com/" + UrlShortern.encode(doc._id);
             res.status(200).json({
                 status: true,
                 message: "Successfully Shortern",
@@ -104,9 +104,12 @@ router.post('/urlshorten', function(req, res) {
 
             // save the new link
             newUrl.save(function(err) {
-                if (err) res.status(400).json({ status: false, message: err.errors.data.message});
+                if (err) {
+                    console.log(err);
+                    res.status(400).json({ status: false, message: err});
+                }
                 // construct the short URL
-                shortUrl = "mobiadzapi.herokuapp.com/" + UrlShortern.encode(newUrl._id);
+                shortUrl = "https://mobiadzapi.herokuapp.com/" + UrlShortern.encode(newUrl._id);
                 res.status(200).json({
                     status: true,
                     message: "Successfully Shortern",

@@ -33,7 +33,7 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
 // ALWAYS AT LAST POSITION
 router.get('/:encoded_id', function(req, res, next) {
   // check if url already exists in database
-  Url.findOne({_id: req.params.encoded_id}, function (err, doc){
+  Url.findOne({_id: UrlShortern.decode(req.params.encoded_id)}, function (err, doc){
     if (doc) {
       // found an entry in the DB, redirect the user to their destination
       res.redirect(doc.long_url);

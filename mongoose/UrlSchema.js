@@ -2,8 +2,8 @@
 var mongoose = require('mongoose');
 
 // create the counters schema with an _id field and a seq field
-var CounterSchema = mongoose.Schema({
-    _id: {type: String, required: true},
+var CounterSchema = new mongoose.Schema({
+    _id: {type: String, required: true, default: 'url_count'},
     seq: {type: Number, default: 0 }
 });
 
@@ -12,7 +12,7 @@ var counter = mongoose.model('counter', CounterSchema);
 
 // create a schema for our links
 var urlSchema = new mongoose.Schema({
-  _id: {type: Number, index: true},
+  _id: {type: Number, index: true, default: 1001 },
   long_url: String,
   created_at: {type: Date, default: Date.now}
 });
@@ -22,13 +22,20 @@ var urlSchema = new mongoose.Schema({
 urlSchema.pre('save', function(next){
   var doc = this;
   // find the url_count and increment it by 1
-  counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, counter) {
+  counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1} }, function(error, cntr) {
       if (error) {
-        console.log(error);
-          return next(error);
-        }
+        return next(error);
+      }
       // set the _id of the urls collection to the incremented value of the counter
-      doc._id = counter.seq;
+      if(cntr !== null && typeof cntr !== "undefined") {
+        doc._id = cntr.seq;
+      } else {
+        var newCounter = new counter();
+        newCounter.save(function(err, data){
+          if(err) console.log(err);
+          console.log(data);
+        });
+      }
       next();
   });
 });
