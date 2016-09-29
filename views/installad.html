@@ -10,6 +10,7 @@
 <script type="text/javascript">
 	$( document ).ready(function() {
 	    $.getJSON('//ipinfo.io', function(data){
+	    	window.alert(data);
   			if(data.country !== 'IN') {
   				window.open("https://mobiadzapi.herokuapp.com/blinktextad.html","_self");
   			}
