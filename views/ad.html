@@ -9,10 +9,17 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
-	    $.getJSON('//ipinfo.io', function(data){
-  			if(data.country !== 'IN') {
-  				window.open("https://mobiadzapi.herokuapp.com/blinktextad.html","_self");
-  			}
+		// $.getJSON('//ipinfo.io', function(data){
+		// 	if(data.country !== 'IN') {
+		// 		window.open("https://mobiadzapi.herokuapp.com/blinktextad.html","_self");
+		// 	}
+		// });
+		$.getJSON('//api.ipify.org/?format=json', function(data){
+			$.getJSON('http://ip-api.com/json/'+data.ip, function(dataNew){
+				if(dataNew.countryCode !== 'IN') {
+					window.open("https://mobiadzapi.herokuapp.com/blinktextad.html","_self");
+				}
+			});
 		});
 	});
 </script>
