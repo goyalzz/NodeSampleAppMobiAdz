@@ -32,7 +32,7 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
 
 router.get(['/install', '/install.html'], function(req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.sendFile(path.resolve('views') + '/installad.html');
+  res.sendFile(path.resolve('views') + '/install.html');
 });
 
 // ALWAYS AT LAST POSITION
