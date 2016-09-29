@@ -30,6 +30,11 @@ router.get(['/tinyurl', '/tinyurl.html'], function(req, res, next) {
   res.sendFile(path.resolve('views') + '/tinyurl.html');
 });
 
+router.get(['/install', '/install.html'], function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  res.sendFile(path.resolve('views') + '/installad.html');
+});
+
 // ALWAYS AT LAST POSITION
 router.get('/:encoded_id', function(req, res, next) {
   // check if url already exists in database
