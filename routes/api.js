@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/countries', function(req, res, next) {
-    res.status(200).json(Country.provinces());
+    res.status(200).json(Country.all());
 });
 
 router.route('/newMobileData')
