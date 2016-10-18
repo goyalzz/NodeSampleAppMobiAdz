@@ -43,7 +43,8 @@ router.get(['/installad', '/installad.html'], function(req, res, next) {
 // ALWAYS AT LAST POSITION
 router.get('/:encoded_id', function(req, res, next) {
   // check if url already exists in database
-  Url.findOne({_id: UrlShortern.decode(req.params.encoded_id)}, function (err, doc){
+  var id = req.params.encoded_id;
+  Url.findOne({_id: UrlShortern.decode(id)}, function (err, doc){
     if (doc) {
       // found an entry in the DB, redirect the user to their destination
       res.redirect(doc.long_url);

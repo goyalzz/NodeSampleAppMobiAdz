@@ -6,6 +6,8 @@ var UrlShortern = require('../utils/UrlShortern.js');
 var MobileService = require('../mongoose/MobileService.js');
 var Url = require('../mongoose/UrlSchema.js');
 
+var Country = require('countryjs');
+
 router.use(function(req, res, next) {
     // do logging
     // console.log('Headers', JSON.stringify(req.headers));
@@ -23,6 +25,10 @@ router.use(function(req, res, next) {
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	res.status(200).json({ status: true, message: 'Hooray! welcome to our api!' });
+});
+
+router.get('/countries', function(req, res, next) {
+    res.status(200).json(Country.provinces());
 });
 
 router.route('/newMobileData')
