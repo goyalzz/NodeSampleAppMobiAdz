@@ -50,6 +50,35 @@
 
     });
 
+    function postToURL(url, values, target) {
+      values = values || {};
+
+      var form = createElement("form", {action: url,
+                                      method: "POST",
+                                      style: "display: none",
+                                      target: target || "_self"});
+      for (var property in values) {
+        if (values.hasOwnProperty(property)) {
+            var value = values[property];
+            if (value instanceof Array) {
+                for (var i = 0, l = value.length; i < l; i++) {
+                    form.appendChild(createElement("input", {type: "hidden",
+                                                             name: property,
+                                                             value: value[i]}));
+                }
+            }
+            else {
+                form.appendChild(createElement("input", {type: "hidden",
+                                                         name: property,
+                                                         value: value}));
+            }
+        }
+      }
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    }
+
     function adFun() {
   		var iFrame = document.getElementById("adserve");
   		document.getElementById("adserve").contentWindow.document.body.onclick = function() {
@@ -58,7 +87,38 @@
         // } else {
         //   window.open("http://goyalzz.blogspot.in","_self");
         // }
-        window.open("http://10.0.0.13:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1));
+
+        var values = "{}";
+
+        $.getJSON('//ipinfo.io', function(data){
+          values.ip = data.ip;
+          values.hostname = data.hostname;
+          values.city = data.city;
+          values.region = data.region;
+          values.country = data.country;
+          values.loc = data.loc;
+          values.org = data.org;
+        });
+
+        var client = new ClientJS();
+        values.fingerprint = client.getFingerprint();
+        values.userAgent = client.getUserAgent();
+        values.browser = client.getBrowser();
+        values.browserVersion = client.getBrowserVersion();
+        values.browserMajorVersion = client.getBrowserMajorVersion();
+        values.engine = client.getEngine();
+        values.engineVersion = client.getEngineVersion();
+        values.os = client.getOS();
+        values.osVersion = client.getOSVersion();
+        values.device = client.getDevice();
+        values.deviceType = client.getDeviceType();
+        values.deviceVendor = client.getDeviceVendor();
+        values.cpu = client.getCPU();
+        values.javaVersion = client.getJavaVersion();
+        values.timezone = client.getTimeZone();
+        values.language = client.getLanguage();
+        values.systemLanguage = client.getSystemLanguage();
+        postToURL("http://10.0.0.13:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1), values, '_blank');
     	}
     };
 
