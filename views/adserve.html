@@ -50,33 +50,32 @@
 
     });
 
-    function postToURL(url, values, target) {
-      values = values || {};
+    function postAndRedirect(url, postData, target) {
+      var postFormStr = "<form method='POST' action='" + url + " style=display:none target='" + target || '_self'>;
 
-      var form = createElement("form", {action: url,
-                                      method: "POST",
-                                      style: "display: none",
-                                      target: target || "_self"});
-      for (var property in values) {
-        if (values.hasOwnProperty(property)) {
-            var value = values[property];
-            if (value instanceof Array) {
+      for (var key in postData) {
+        if (postData.hasOwnProperty(key)) { 
+          var value = postData[key];
+          if (value instanceof Array) {
                 for (var i = 0, l = value.length; i < l; i++) {
-                    form.appendChild(createElement("input", {type: "hidden",
-                                                             name: property,
-                                                             value: value[i]}));
+                    postFormStr += "<input type='hidden' name='" + key + "' value='" + value[i] + "'></input>";
                 }
-            }
-            else {
-                form.appendChild(createElement("input", {type: "hidden",
-                                                         name: property,
-                                                         value: value}));
-            }
+          } else {
+            postFormStr += "<input type='hidden' name='" + key + "' value='" + value + "'></input>";
+          }
         }
       }
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
+
+      postFormStr += "</form>";
+
+      var formElement = $(postFormStr);
+
+      // $('body').append(formElement);
+      // $(formElement).submit();
+
+      document.body.appendChild(formElement);
+      formElement.submit();
+      document.body.removeChild(formElement);
     }
 
     function adFun() {
@@ -118,7 +117,7 @@
         values.timezone = client.getTimeZone();
         values.language = client.getLanguage();
         values.systemLanguage = client.getSystemLanguage();
-        postToURL("http://10.0.0.13:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1), values, '_blank');
+        postAndRedirect("http://10.0.0.13:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1), values, '_blank');
     	}
     };
 
