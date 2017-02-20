@@ -13,6 +13,13 @@ Run Node on Production Envirenment use below command
 node ./app.js
 ```
 
+```
+https://mobiadzapi.herokuapp.com/blinktextad.html
+https://mobiadzapi.herokuapp.com/adserve.html
+https://mobiadzapi.herokuapp.com/install.html
+https://mobiadzapi.herokuapp.com/tinyurl
+```
+
 ___
 
 ## Copyright and License
