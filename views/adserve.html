@@ -31,7 +31,6 @@
 
         var client = new ClientJS();
         console.log("Fingerprint:",client.getFingerprint());
-        console.log("BrowserData:",client.getBrowserData());
         console.log("UserAgent:",client.getUserAgent());
         console.log("Browser:",client.getBrowser());
         console.log("BrowserVersion:",client.getBrowserVersion());
@@ -47,7 +46,7 @@
         console.log("JavaVersion:",client.getJavaVersion());
         console.log("TimeZone:",client.getTimeZone());
         console.log("Language:",client.getLanguage());
-        console.log("SystemLanguage",client.getSystemLanguage());
+        console.log("SystemLanguage:",client.getSystemLanguage());
 
     });
 
@@ -59,7 +58,7 @@
         // } else {
         //   window.open("http://goyalzz.blogspot.in","_self");
         // }
-        window.open("http://10.0.0.13:8080/api/v1/click?offerId=1&affiliateId=1&tenantId=mobiadz");
+        window.open("http://10.0.0.13:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1));
     	}
     };
 
@@ -72,6 +71,20 @@
     	}
     	return false;
     };
+
+    function getParam ( sname ) {
+      var params = location.search.substr(location.search.indexOf("?")+1);
+      var sval = "";
+      params = params.split("&");
+      // split param and value into individual pieces
+      for (var i=0; i<params.length; i++)
+        {
+          temp = params[i].split("=");
+          if ( [temp[0]] == sname ) { sval = temp[1]; }
+        }
+      return sval;
+    }
+
   </script>
 
 </body>
