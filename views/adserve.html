@@ -70,12 +70,9 @@
 
       var formElement = $(postFormStr);
 
-      // $('body').append(formElement);
-      // $(formElement).submit();
-
-      document.body.appendChild(formElement);
-      formElement.submit();
-      document.body.removeChild(formElement);
+      $('body').append(formElement);
+      $(formElement).submit();
+      $('body').remove(formElement);
     }
 
     function adFun() {
