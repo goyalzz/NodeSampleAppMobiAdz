@@ -59,8 +59,9 @@
           "Content-Type": "application/json; charset=utf-8"
         },
         success: function (data) {
+          console.log(data);
           if(data.status) {
-            window.open(data.data);
+            window.open(data.data, "_system");
           }
         },
         error: function (data) {
