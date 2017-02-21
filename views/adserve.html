@@ -82,16 +82,16 @@
 
         $.getJSON('//ipinfo.io', function(data){
           values.ip = data.ip;
-          values.hostname = data.hostname;
+          values.hostName = data.hostname;
           values.city = data.city;
           values.region = data.region;
           values.country = data.country;
           values.loc = data.loc;
-          values.org = data.org;
+          values.internetProvider = data.org;
         });
 
         var client = new ClientJS();
-        values.fingerprint = client.getFingerprint();
+        values.fingerPrint = client.getFingerprint();
         values.userAgent = client.getUserAgent();
         values.browser = client.getBrowser();
         values.browserVersion = client.getBrowserVersion();
