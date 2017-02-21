@@ -60,6 +60,8 @@
         },
         success: function (data) {
           console.log(data);
+          if(isJsonString(data)) 
+            data = JSON.parse(data);
           if(data.status) {
             window.open(data.data, "_system");
           }
@@ -137,7 +139,25 @@
           if ( [temp[0]] == sname ) { sval = temp[1]; }
         }
       return sval;
-    }
+    };
+
+    isJsonString(str) {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
+  };
+
+  isJsonObject(obj) {
+      try{
+        JSON.stringify(obj);
+      } catch (e) {
+        return false;
+      }
+      return true;
+  };
 
   </script>
 
