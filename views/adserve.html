@@ -111,7 +111,7 @@
 
         console.log("POST Request", values);
 
-        postAndRedirect("//localhost:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1), values);
+        postAndRedirect("http://localhost:8080/api/v1/click?"+location.search.substr(location.search.indexOf("?")+1), values);
     	}
     };
 
