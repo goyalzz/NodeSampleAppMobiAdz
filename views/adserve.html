@@ -54,7 +54,7 @@
       $.ajax({
         url: url,
         type: 'POST',
-        data: postData,
+        data: JSON.stringify(postData);,
         headers: {
           "Content-Type": "application/json; charset=utf-8"
         },
@@ -91,7 +91,7 @@
         });
 
         var client = new ClientJS();
-        // values.fingerPrint = client.getFingerprint();
+        values.fingerPrint = client.getFingerprint();
         values.userAgent = client.getUserAgent();
         values.browser = client.getBrowser();
         values.browserVersion = client.getBrowserVersion();
