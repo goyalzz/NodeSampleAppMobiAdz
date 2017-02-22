@@ -63,7 +63,7 @@
           if(isJsonString(data)) 
             data = JSON.parse(data);
           if(data.status) {
-            window.open(data.data, "_blank");
+            window.open("\""+data.data+"\"", "_blank");
           }
         },
         error: function (data) {
