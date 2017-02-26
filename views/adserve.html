@@ -51,15 +51,6 @@
     });
 
     function postAndRedirect(url, postData, target) {
-      var xhr = new XMLHttpRequest();
-      if ("withCredentials" in xhr){
-        xhr.open('POST', url, true);
-      } else if (typeof XDomainRequest != "undefined"){
-        xhr = new XDomainRequest();
-        xhr.open('POST', url);
-      } else {
-        xhr = null;
-      }
       $.ajax({
         url: url,
         type: 'POST',
