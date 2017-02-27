@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Mobiadz Counting Impression</title>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+	<img src="images/aff_i.jpg" />
+
+	<script src="/javascripts/client.min.js"></script>
+	<script type="text/javascript">
+
+    	function getAndRedirect(url, headerData) {
+    		headerData."Content-Type" = "application/json; charset=utf-8";
+      		$.ajax({
+        		url: url,
+        		type: 'GET',
+        		headers: headerData,
+        		success: function (data) {
+	          		console.log(data);
+    	      		if(isJsonString(data)) 
+        	    		data = JSON.parse(data);
+          			if(data.status) {
+            			window.open(data.data, "_self");
+          			}
+        		},
+        		error: function (data) {
+	          		console.log(data);     
+    	    	}
+      		});
+    	};
+
+  		$( document ).ready(function() {
+  			var values = {};
+
+        	$.getJSON('//ipinfo.io', function(data){
+          		values.ip = data.ip;
+          		values.hostName = data.hostname;
+          		values.city = data.city;
+          		values.region = data.region;
+          		values.country = data.country;
+          		values.loc = data.loc;
+          		values.internetProvider = data.org;
+        	});
+
+        	var client = new ClientJS();
+        	values.fingerPrint = client.getFingerprint();
+        	values.userAgent = client.getUserAgent();
+        	values.browser = client.getBrowser();
+        	values.browserVersion = client.getBrowserVersion();
+        	values.browserMajorVersion = client.getBrowserMajorVersion();
+        	values.engine = client.getEngine();
+        	values.engineVersion = client.getEngineVersion();
+        	values.os = client.getOS();
+        	values.osVersion = client.getOSVersion();
+        	values.device = client.getDevice();
+        	values.deviceType = client.getDeviceType();
+        	values.deviceVendor = client.getDeviceVendor();
+        	values.cpu = client.getCPU();
+        	values.javaVersion = client.getJavaVersion();
+        	values.timezone = client.getTimeZone();
+        	values.language = client.getLanguage();
+        	values.systemLanguage = client.getSystemLanguage();
+
+        	console.log("GET Request", values);
+
+        	getAndRedirect("http://localhost:8080/api/v1/aff_c?"+location.search.substr(location.search.indexOf("?")+1), values);
+    	});
+    </script>
+
+</body>
+</html>
