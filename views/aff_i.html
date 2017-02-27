@@ -19,11 +19,6 @@
         		headers: headerData,
         		success: function (data) {
 	          		console.log(data);
-    	      		if(isJsonString(data)) 
-        	    		data = JSON.parse(data);
-          			if(data.status) {
-            			window.open(data.data);
-          			}
         		},
         		error: function (data) {
 	          		console.log(data);     
